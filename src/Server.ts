@@ -2,9 +2,12 @@ import http from 'http';
 import express from 'express';
 import config from './config/Config';
 import SwaggerUi from 'swagger-ui-express';
+import 'reflect-metadata';
+import './db/pg_connect';
 import { logger } from './config/Logger';
 import { SwaggerDocument } from './config/SwaggerDocument';
-import { HealthCheck } from './routes/HealthCheck';
+import { HealthCheck } from './routes/HealthCheckRoute';
+import { UsersRoute } from './routes/UsersCredentialRoute';
 
 const NAMESPACE = 'Server';
 const app = express();
@@ -48,6 +51,7 @@ app.use((req, res, next) => {
 
 /** Routes go here */
 app.use(HealthCheck);
+app.use(UsersRoute);
 
 /** Error handling */
 app.use((req, res, next) => {

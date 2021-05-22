@@ -1,5 +1,5 @@
 import request from 'supertest';
-import { server } from '../source/Server';
+import { server } from '../src/Server';
 
 describe('Express Setup testing', () => {
     afterAll(() => {

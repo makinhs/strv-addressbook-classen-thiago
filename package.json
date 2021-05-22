@@ -4,12 +4,13 @@
   "description": "",
   "main": "Server.ts",
   "scripts": {
-    "build": "rm -rf ./build/ && prettier -c source && tsc",
+    "build": "rm -rf ./build/ && prettier -c src && tsc",
     "delete-build": "rm -rf ./build/",
     "prettier": "prettier --write source/**/*.*",
     "tsc": "tsc",
-    "dev": "nodemon source/Server.ts",
-    "test": "jest --detectOpenHandles"
+    "dev": "nodemon src/Server.ts",
+    "test": "jest --detectOpenHandles",
+    "typeorm": "npx ts-node ./node_modules/typeorm/cli.js"
   },
   "keywords": [],
   "author": "",
@@ -18,7 +19,10 @@
     "@elastic/ecs-pino-format": "^1.1.2",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
-    "pino": "^6.11.3"
+    "pg": "^8.6.0",
+    "pino": "^6.11.3",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.32"
   },
   "devDependencies": {
     "@types/dotenv": "^8.2.0",

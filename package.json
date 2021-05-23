@@ -9,7 +9,7 @@
     "prettier": "prettier --write source/**/*.*",
     "tsc": "tsc",
     "dev": "nodemon src/Server.ts",
-    "test": "jest --detectOpenHandles",
+    "test": "jest",
     "typeorm": "npx ts-node ./node_modules/typeorm/cli.js"
   },
   "keywords": [],

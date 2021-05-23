@@ -1,4 +1,4 @@
-import { getPing } from '../controllers/HealthCheck.Swagger';
+import { getPing } from './SwaggerRoutes/HealthCheck.Swagger';
 
 export const SwaggerDocument = {
     openapi: '3.0.1',

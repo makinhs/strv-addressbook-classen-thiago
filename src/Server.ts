@@ -4,29 +4,23 @@ import SwaggerUi from 'swagger-ui-express';
 import 'reflect-metadata';
 import './db/pg_connect';
 import { config } from './config/Config';
+import { loggerMiddleware } from './middleware/logger.middleware';
+import { SwaggerDocument } from './config/swagger/SwaggerDocument';
+import { HealthCheck } from './routes/HealthCheck.Route';
+import { UsersRoute } from './routes/UsersCredential.Route';
+import { AuthRoute } from './routes/Auth.Route';
+import { errorMiddleware } from './middleware/error.middleware';
+import { corsMiddleware } from './middleware/cors.middleware';
 import { logger } from './config/Logger';
-import { SwaggerDocument } from './config/SwaggerDocument';
-import { HealthCheck } from './routes/HealthCheckRoute';
-import { UsersRoute } from './routes/UsersCredentialRoute';
-import { AuthRoute } from './routes/AuthRoute';
+//import { connectDB } from './db/pg_connect';
 
-const NAMESPACE = 'Server';
+/** Connecting ORM to PG DB */
+//connectDB().then(() => logger.info('conected to SQL db, starting node server.'));
+
 const app = express();
 
 /** Log the request */
-app.use((req, res, next) => {
-    /** Log the req */
-    logger.info(`[${NAMESPACE}] [Request] METHOD: [${req.method}] - URL: [${req.url}] - IP: [${req.socket.remoteAddress}]`);
-
-    res.on('finish', () => {
-        /** Log the res */
-        logger.info(`[${NAMESPACE}] [Response] METHOD: [${req.method}] - URL: [${req.url}] - STATUS: [${res.statusCode}] - IP: [${req.socket.remoteAddress}]`);
-    });
-
-    next();
-});
-
-/** Pino Logger */
+app.use(loggerMiddleware);
 
 /** Parse the body of the request */
 app.use(express.urlencoded({ extended: true }));
@@ -38,34 +32,18 @@ if (config.env !== 'production') {
 }
 
 /** CORS */
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept, Authorization');
+app.use(corsMiddleware);
 
-    if (req.method == 'OPTIONS') {
-        res.header('Access-Control-Allow-Methods', 'PUT, POST, PATCH, DELETE, GET');
-        return res.status(200).json({});
-    }
-
-    next();
-});
-
-/** Routes go here */
+/** Api Routes go here */
 app.use(HealthCheck);
 app.use(UsersRoute);
 app.use(AuthRoute);
 
 /** Error handling */
-app.use((req, res, next) => {
-    const error = new Error('Not found');
-
-    res.status(404).json({
-        message: error.message
-    });
-});
+app.use(errorMiddleware);
 
 const httpServer = http.createServer(app);
 
-httpServer.listen(config.server.port, () => logger.info(`[${NAMESPACE}] Server is running ${config.server.hostname}:${config.server.port}`));
+httpServer.listen(config.server.port, () => logger.info(`Server is running ${config.server.hostname}:${config.server.port}`));
 
 export { httpServer as server };

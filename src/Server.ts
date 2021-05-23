@@ -12,17 +12,13 @@ import { AuthRoute } from './routes/Auth.Route';
 import { errorMiddleware } from './middleware/error.middleware';
 import { corsMiddleware } from './middleware/cors.middleware';
 import { logger } from './config/Logger';
-//import { connectDB } from './db/pg_connect';
-
-/** Connecting ORM to PG DB */
-//connectDB().then(() => logger.info('conected to SQL db, starting node server.'));
 
 const app = express();
 
 /** Log the request */
 app.use(loggerMiddleware);
 
-/** Parse the body of the request */
+/** Body parser */
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 

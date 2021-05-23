@@ -2,6 +2,8 @@ import { NextFunction, Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import { logger } from '../config/Logger';
 import { User } from '../db/models/user';
+import * as jwt from 'jsonwebtoken';
+import { config } from '../config/Config';
 
 class UsersCredentialController {
     async store(req: Request, res: Response) {
@@ -19,7 +21,10 @@ class UsersCredentialController {
         const user = repository.create({ email, password });
         await repository.save(user);
 
-        res.status(201).json({ id: user.id });
+        logger.info('signing user jwt');
+        const jwtToken = jwt.sign({ id: user.id }, config.jwtSecret, { expiresIn: '1d' });
+
+        res.status(201).json({ token: jwtToken });
     }
 }
 

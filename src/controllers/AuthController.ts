@@ -3,6 +3,8 @@ import { getRepository } from 'typeorm';
 import { User } from '../db/models/user';
 import * as argon2 from 'argon2';
 import { logger } from '../config/Logger';
+import * as jwt from 'jsonwebtoken';
+import { config } from '../config/Config';
 
 class AuthController {
     async authenticate(req: Request, res: Response) {
@@ -24,8 +26,10 @@ class AuthController {
             return res.sendStatus(500);
         }
 
-        // TODO - JWT Token
-        res.status(200).json({ token: 'jwt' });
+        logger.info('signing user jwt.');
+        const jwtToken = jwt.sign({ id: user.id }, config.jwtSecret, { expiresIn: '1h' });
+
+        res.status(200).json({ token: jwtToken });
     }
 }
 

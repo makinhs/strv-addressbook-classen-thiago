@@ -2,7 +2,7 @@ import { Column, Entity, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 import * as argon2 from 'argon2';
 import { config } from '../../config/Config';
 
-@Entity('UsersCredential')
+@Entity('User')
 class User {
     @PrimaryGeneratedColumn('uuid')
     id: string;

@@ -1,12 +1,12 @@
 import { MigrationInterface, QueryRunner, Table } from 'typeorm';
 
-export class CreateUsersCredentialTable1621712104912 implements MigrationInterface {
+export class CreateUserTable1621793365519 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query('CREATE EXTENSION IF NOT EXISTS "uuid-ossp"');
 
         await queryRunner.createTable(
             new Table({
-                name: 'UsersCredential',
+                name: 'User',
                 columns: [
                     {
                         name: 'id',
@@ -30,7 +30,7 @@ export class CreateUsersCredentialTable1621712104912 implements MigrationInterfa
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
-        await queryRunner.dropTable('users');
+        await queryRunner.dropTable('User');
         await queryRunner.query('DROP EXTENSION "uuid-ossp"');
     }
 }

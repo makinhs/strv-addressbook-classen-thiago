@@ -8,6 +8,7 @@ import { logger } from './config/Logger';
 import { SwaggerDocument } from './config/SwaggerDocument';
 import { HealthCheck } from './routes/HealthCheckRoute';
 import { UsersRoute } from './routes/UsersCredentialRoute';
+import { AuthRoute } from './routes/AuthRoute';
 
 const NAMESPACE = 'Server';
 const app = express();
@@ -52,6 +53,7 @@ app.use((req, res, next) => {
 /** Routes go here */
 app.use(HealthCheck);
 app.use(UsersRoute);
+app.use(AuthRoute);
 
 /** Error handling */
 app.use((req, res, next) => {

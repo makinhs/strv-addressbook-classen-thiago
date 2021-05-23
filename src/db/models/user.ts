@@ -5,11 +5,11 @@ import { config } from '../../config/Config';
 @Entity('User')
 class User {
     @PrimaryGeneratedColumn('uuid')
-    id: string;
+    id!: string;
     @Column()
-    email: string;
+    email!: string;
     @Column()
-    password: string;
+    password!: string;
 
     @BeforeInsert()
     private async hashPassword() {

@@ -16,7 +16,7 @@ class AuthController {
             return res.status(401).json({ error: 'Email or Password invalid.' });
         }
 
-        const isValid = authService.validatePassword(user, password);
+        const isValid = await authService.validatePassword(user, password);
 
         if (!isValid) return res.status(401).json({ error: 'Email or Password invalid.' });
 

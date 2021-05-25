@@ -18,11 +18,21 @@ const argonConfig = { type: argon2.argon2id, memoryCost: 2 ** 16, hashLength: 50
 
 const jwtSecret = process.env.JWT_SECRET || 'secret';
 
+const firebaseConfig = {
+    apiKey: 'AIzaSyDyX3SkzVsX3sfMNNBZKk99jQLrAGPVKh8',
+    authDomain: 'strv-addrsbook-classen-thiago.firebaseapp.com',
+    projectId: 'strv-addrsbook-classen-thiago',
+    storageBucket: 'strv-addrsbook-classen-thiago.appspot.com',
+    messagingSenderId: '653055635048',
+    appId: '1:653055635048:web:5e7eed84534ba9035015dd'
+};
+
 const config = {
     server: SERVER,
     env: ENV,
     argon: argonConfig,
-    jwtSecret
+    jwtSecret,
+    firebaseConfig
 };
 
 export { config };

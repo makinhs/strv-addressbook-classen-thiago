@@ -2,7 +2,7 @@ import * as jwt from 'jsonwebtoken';
 import { config } from '../config/Config';
 import { logger } from '../config/Logger';
 import * as argon2 from 'argon2';
-import { User } from '../db/models/user';
+import { User } from '../db/models/User';
 
 class AuthService {
     constructor() {}

@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { logger } from '../config/Logger';
-import { User } from '../db/models/user';
+import { User } from '../db/models/User';
 import { userService } from '../services/User.service';
 import { authService } from '../services/Auth.service';
 
@@ -12,7 +12,7 @@ class UsersCredentialController {
         try {
             user = await userService.registerNewUser(email, password);
         } catch (err) {
-            return res.status(409).json({ error: 'User already registered.' });
+            return res.status(409).json(err);
         }
 
         logger.info('signing user jwt');

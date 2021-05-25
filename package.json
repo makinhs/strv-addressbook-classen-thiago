@@ -19,6 +19,8 @@
     "@elastic/ecs-pino-format": "^1.1.2",
     "dotenv": "^9.0.2",
     "express": "^4.17.1",
+    "firebase": "^8.6.2",
+    "firebase-admin": "^9.8.0",
     "jsonwebtoken": "^8.5.1",
     "pg": "^8.6.0",
     "pino": "^6.11.3",

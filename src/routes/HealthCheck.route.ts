@@ -1,5 +1,5 @@
 import express from 'express';
-import controller from '../controllers/HealthCheckController';
+import controller from '../controllers/HealthCheck.controller';
 import { initPassport } from '../config/Passport';
 
 const router = express.Router(),

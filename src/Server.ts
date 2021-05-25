@@ -6,9 +6,10 @@ import './db/pg_connect';
 import { config } from './config/Config';
 import { loggerMiddleware } from './middleware/logger.middleware';
 import { SwaggerDocument } from './config/swagger/SwaggerDocument';
-import { HealthCheck } from './routes/HealthCheck.Route';
-import { UsersRoute } from './routes/UsersCredential.Route';
-import { AuthRoute } from './routes/Auth.Route';
+import { HealthCheck } from './routes/HealthCheck.route';
+import { UsersRoute } from './routes/UsersCredential.route';
+import { AuthRoute } from './routes/Auth.route';
+import { ContactRoute } from './routes/Contact.route';
 import { errorMiddleware } from './middleware/error.middleware';
 import { corsMiddleware } from './middleware/cors.middleware';
 import { logger } from './config/Logger';
@@ -34,6 +35,7 @@ app.use(corsMiddleware);
 app.use(HealthCheck);
 app.use(UsersRoute);
 app.use(AuthRoute);
+app.use(ContactRoute);
 
 /** Error handling */
 app.use(errorMiddleware);
